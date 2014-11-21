@@ -1,0 +1,6 @@
+media/*
+!media/badges
+media/badges/*
+!media/badges/README.md
+components/*
+!components/README.md

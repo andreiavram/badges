@@ -1,0 +1,21 @@
+body {
+    background-color: #FFFFFF;
+    padding-top: 80px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Lobster', serif;
+}
+
+.badge-masonry-brick {
+    width: 300px;
+    padding: 10px;
+    text-align: justify;
+}
+
+.badge-masonry-brick img {
+    width: 100%;
+    margin-bottom: 20px;
+}

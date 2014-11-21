@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div ng-controller="BadgesController">
+        <div masonry item-selector=".badge-masonry-brick" column-width="320">
+            <div masonry-brick class="badge-masonry-brick" ng-repeat="badge in badges">
+                <img ng-src="/media/[[ badge.imagine ]]" alt="[[ badge.nume_activitate ]]">
+                    <strong><a href = "/[[ badge.id ]]/">[[ badge.nume_activitate ]] [[ badge.an_activitate ]]</a></strong><br>
+                    <span style="font-size: 10px; color: #333;"><em am-time-ago="badge.timestamp"></em> de [[ badge.poster.full_name ? badge.poster.full_name : badge.poster.username ]]</span><br>
+                    <small>[[ badge.amintire | limitTo: 300 ]] [[ badge.amintire.length > 300 ? "..." : "" ]]</small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrajs %}
+    <script src = "{% static 'jquery-bridget/jquery.bridget.js' %}"></script>
+    <script src = "{% static 'get-style-property/get-style-property.js' %}"></script>
+    <script src = "{% static 'get-size/get-size.js' %}"></script>
+    <script src = "{% static 'eventEmitter/EventEmitter.js' %}"></script>
+    <script src = "{% static 'eventie/eventie.js' %}"></script>
+    <script src = "{% static 'doc-ready/doc-ready.js' %}"></script>
+    <script src = "{% static 'matches-selector/matches-selector.js' %}"></script>
+    <script src = "{% static 'outlayer/item.js' %}"></script>
+    <script src = "{% static 'outlayer/outlayer.js' %}"></script>
+    <script src = "{% static 'masonry/masonry.js' %}"></script>
+    <script src = "{% static 'imagesloaded/imagesloaded.js' %}"></script>
+    <script src = "{% static 'angular-masonry/angular-masonry.js' %}"></script>
+{% endblock %}
