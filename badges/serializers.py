@@ -19,7 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class BadgeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Badge
-        fields = ['nume_activitate', 'an_activitate', 'poster', 'amintire', 'timestamp', 'acceptate', 'imagine']
+        fields = ['nume_activitate', 'an_activitate', 'poster', 'amintire', 'timestamp', 'acceptat', 'imagine']
 
     poster = UserSerializer(many=False)
 

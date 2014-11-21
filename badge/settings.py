@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,7 +43,10 @@ INSTALLED_APPS = (
     'rest_framework',
 
     'badges',
+    'users',
 )
+
+
 
 STATICFILES_FINDERS = global_settings.STATICFILES_FINDERS + ('djangobower.finders.BowerFinder', )
 
@@ -124,6 +128,7 @@ BOWER_INSTALLED_APPS = (
 )
 
 TEMPLATE_DIRS = global_settings.TEMPLATE_DIRS + (os.path.join(BASE_DIR, "templates"), )
+
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
