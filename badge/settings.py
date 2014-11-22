@@ -41,6 +41,7 @@ INSTALLED_APPS = (
 
     'djangobower',
     'rest_framework',
+    'crispy_forms',
 
     'badges',
     'users',
@@ -137,3 +138,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap3"

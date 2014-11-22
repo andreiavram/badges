@@ -2,6 +2,33 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 
+{% block page_title %}
+    Utilizator nou
+{% endblock %}
+
 {% block content %}
     {% crispy form form.helper %}
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+    function check_oncr() {
+        console.log("ehre", $("#id_oncr_id").val());
+        $.ajax({
+            url: "http://www.oncr.ro/" + $("#id_oncr_id").val() + ".json",
+            success: function (data) {
+                console.log(data);
+                $("#id_last_name").val(data.lastName);
+                $("#id_first_name").val(data.firstName);
+            },
+            dataType: "json",
+            jsonpCallback: 'callback'
+        });
+    }
+
+    $("document").ready(function () {
+        $("#id_oncr_id").on('input', _.debounce(check_oncr, 750));
+    })
+
+    </script>
 {% endblock %}

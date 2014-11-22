@@ -1,5 +1,5 @@
 #coding: utf-8
-from badges.models import CentruLocal
+from users.models import CentruLocal
 
 __author__ = 'andrei'
 

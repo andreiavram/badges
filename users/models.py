@@ -67,10 +67,12 @@ class CentruLocal(models.Model):
 
 class Utilizator(models.Model):
     user = models.OneToOneField("auth.User", null=True, blank=True)
-    centrul_local = models.ForeignKey("badges.CentruLocal", null=True, blank=True)
-    porecla = models.CharField(max_length=255, null=True, blank=True)
-    oncr_id = models.CharField(max_length=10, null=True, blank=True)
+    centrul_local = models.ForeignKey("users.CentruLocal", null=True, blank=True)
+    porecla = models.CharField(max_length=255, null=True, blank=True, help_text=u"Dacă ai un 'nume de cercetaș' după care ești cunoscut")
+    oncr_id = models.CharField(max_length=10, null=True, blank=True, verbose_name=u"ID ONCR", help_text=u"ID-ul tău de cercetaș, de la oncr.ro")
 
     #   we might want to allow anonymous users
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
+    first_name = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Nume")
+    last_name = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Prenume")
+
+    is_auto_approved = models.BooleanField(default=False, verbose_name=u"Este aprobat automat")
