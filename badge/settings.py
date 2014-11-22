@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.core.urlresolvers import reverse_lazy
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 from django.conf import global_settings
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
     'djangobower',
     'rest_framework',
     'crispy_forms',
+    'django_gravatar',
 
     'badges',
     'users',
@@ -140,3 +142,8 @@ REST_FRAMEWORK = {
 }
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
+SITE_ID = 1
+LOGIN_REDIRECT_URL = reverse_lazy("badges:index")
+LOGIN_URL = reverse_lazy("users:login")
+
+TEMPLATE_CONTEXT_PROCESSOR = global_settings.TEMPLATE_CONTEXT_PROCESSORS + ("django.core.context_processors.request", )

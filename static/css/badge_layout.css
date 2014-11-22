@@ -3,6 +3,8 @@ body {
     padding-top: 80px;
     color: #000;
     font-family: 'Roboto', sans-serif;
+    -webkit-backface-visibility: hidden;
+
 }
 
 h1, h2, h3 {
@@ -10,7 +12,6 @@ h1, h2, h3 {
 }
 
 .badge-masonry-brick {
-    width: 300px;
     padding: 10px;
     text-align: justify;
 }
@@ -22,4 +23,37 @@ h1, h2, h3 {
 
 form.form-horizontal .form-group {
     padding: 0 10px;
+}
+
+.big-add-buton {
+    position: fixed;
+    top: 150px;
+    left: 20px;
+    font-size: 45px;
+    color: #000033;
+}
+
+.big-add-buton :hover {
+    color: #163A59;
+}
+
+.big-add-buton a:hover {
+    text-decoration: none;
+}
+
+.big-add-buton a span.hidden-description {
+    display: none;
+    font-size: 18px;
+    font-family: 'Lobster', serif;
+    text-decoration: none;
+    position: relative;
+    bottom: 18px;
+}
+
+.big-add-buton:hover span.hidden-description {
+    display: inline;
+}
+
+img.gravatar-profile {
+    margin-right: 10px;
 }

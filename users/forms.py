@@ -1,15 +1,22 @@
 # coding: utf-8
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, Div, Submit
+from crispy_forms.layout import Layout, Field, Div, Submit, Row, HTML
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms.fields import EmailField
+from django.forms.forms import Form
 from django.forms.widgets import PasswordInput
 from django.forms.models import ModelForm, ModelChoiceField
 from django.forms import CharField
 from users.models import Utilizator
 
 __author__ = 'yeti'
+
+
+class LoginForm(AuthenticationForm):
+    username = CharField(max_length=255, label=u"Email")
+    password = CharField(max_length=255, widget=PasswordInput, label=u"Parolă")
 
 
 class RegistrationForm(ModelForm):
@@ -29,17 +36,15 @@ class RegistrationForm(ModelForm):
         self.helper.form_class = "form-horizontal"
         self.helper.form_method = "post"
 
-        self.helper.layout = Layout(Div(Div(Field("oncr_id", ), css_class="col-md-4 col-xs-12"),
+        self.helper.layout = Layout(Row(Div(Field("oncr_id", ), css_class="col-md-4 col-xs-12"),
                                         Div(Field("first_name"), css_class="col-md-4 col-xs-12"),
-                                        Div(Field("last_name"), css_class="col-md-4 col-xs-12"),
-                                        css_class="row"),
-                                    Div(Div(Field("porecla"), css_class="col-md-6 col-xs-12"),
-                                        Div(Field("centrul_local"), css_class="col-md-6 col-xs-12"),
-                                        css_class="row"),
-                                    Div(Div(Field("email"), css_class="col-md-4 col-xs-12"),
+                                        Div(Field("last_name"), css_class="col-md-4 col-xs-12")),
+                                    Row(Div(Field("porecla"), css_class="col-md-6 col-xs-12"),
+                                        Div(Field("centrul_local"), css_class="col-md-6 col-xs-12")),
+                                    Row(Div(Field("email"), css_class="col-md-4 col-xs-12"),
                                         Div(Field("parola"), css_class="col-md-4 col-xs-12"),
-                                        Div(Field("parola_verificare"), css_class="col-md-4 col-xs-12"),
-                                        css_class="row"))
+                                        Div(Field("parola_verificare"), css_class="col-md-4 col-xs-12")),
+                                    )
 
         self.helper.add_input(Submit("submit", "Trimite", css_class="btn btn-success pull-right"))
         self.helper.form_action = "."

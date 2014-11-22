@@ -6,8 +6,12 @@ from badges.models import Badge
 
 
 class BadgeAdmin(ModelAdmin):
-    list_display = ['nume_activitate', 'an_activitate', 'poster']
-    list_filter = ['an_activitate']
+    list_display = ['eveniment_nume', 'eveniment_an', 'poster']
 
+    def eveniment_nume(self, obj):
+        return obj.eveniment.nume
+
+    def eveniment_an(self, obj):
+        return obj.eveniment.an
 
 admin.site.register(Badge, BadgeAdmin)

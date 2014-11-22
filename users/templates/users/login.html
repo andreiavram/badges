@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class = "row">
+    <div class = "col-md-6 col-xs-12" >
+    <form action = "" method="post">
+    {{ form|crispy }}
+    <div class="form-actions">
+        <a href = "#">Mi-am uitat parola!</a> <input type="submit" name="submit" value="Login" class="btn btn-primary btn btn-success pull-right" id="submit-id-submit">
+    </div>
+        {% csrf_token %}
+    </form></div>
+    <div class = "col-md-6 col-xs-12">
+        <p>Nu ai cont? Poți să te înregistrezi în mai puțin de 1 minut <a href = "{% url "users:register" %}">aici!</a></p>
+    </div>
+    </div>
+{% endblock %}
