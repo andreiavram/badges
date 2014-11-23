@@ -19,6 +19,8 @@ angular.module('badges').constant('angularMomentConfig', {
     timezone: 'Europe/Bucharest' // optional
 });
 
+
+
 angular.module('badges').factory('_', ['$window',
       function($window) {
         return $window._;

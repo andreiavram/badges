@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block page_title %}
-    {{ object }}
+   {{ object }} {% if user.id not in object.posters %}<span style = "font-size: 14px" class = "pull-right">Ai și tu badge-ul acesta? <a style = "margin-left: 10px;" href = "{% url "badges:badge_append" pk=object.id %}" class = "btn btn-success">Spune-ne povestea ta!</a></span>{% endif %}
 {% endblock %}
 
 {% block content %}

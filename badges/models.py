@@ -51,6 +51,8 @@ class Eveniment(models.Model):
         imagine = self.get_badge_imagine_implicita()
         return imagine.imagine_thumbnail if imagine else None
 
+    def posters(self):
+        return self.badge_set.filter(poster__isnull=False).values_list("poster__id", flat=True)
 
 
 class Badge(models.Model):

@@ -98,6 +98,14 @@ div.twitter a, div.facebook a {
     display: block;
 }
 
+.badge-masonry-brick h2 {
+    font-size: 24px;
+}
+
+.badge-masonry-brick h2 a:hover {
+    text-decoration: none;
+}
+
 .badge-toolbox {
     font-size: 24px;
     position: absolute;

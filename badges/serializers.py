@@ -4,7 +4,7 @@ from rest_framework.pagination import PaginationSerializer
 from badges.models import Badge, Eveniment
 from users.serializers import UserSerializer
 from rest_framework import routers, serializers, viewsets
-
+from time import mktime
 
 __author__ = 'yeti'
 
@@ -12,16 +12,19 @@ __author__ = 'yeti'
 class BadgeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Badge
-        fields = ['poster', 'amintire', 'timestamp', 'acceptat', 'imagine', 'imagine_thumbnail']
+        fields = ['poster', 'amintire', 'timestamp', 'acceptat', 'imagine', 'imagine_thumbnail', 'timestamp_processed']
 
     poster = UserSerializer(many=False)
     imagine_thumbnail = serializers.SerializerMethodField("get_imagine_thumbnail")
+    timestamp_processed = serializers.SerializerMethodField("get_timestamp_processed")
 
     def get_imagine_thumbnail(self, obj):
         if obj.imagine:
             return obj.imagine_thumbnail.url
         return None
 
+    def get_timestamp_processed(self, obj):
+        return mktime(obj.timestamp.timetuple())
 
 class EvenimentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
