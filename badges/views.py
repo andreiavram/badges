@@ -1,13 +1,14 @@
 # coding: utf-8
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from rest_framework import viewsets
 
 from badges.models import Badge, Eveniment
@@ -98,6 +99,19 @@ class BadgeAppend(CreateView):
         data['titlu'] = u"Povestea ta de la %s" % self.event
         return data
 
+
+class BadgeAproba(ListView):
+    model = Badge
+    template_name = "badges/badge_approve_list.html"
+
+    @method_decorator(user_passes_test(lambda u: u.is_staff()))
+    def dispatch(self, request, *args, **kwargs):
+        return super(BadgeAproba, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        qs = super(BadgeAproba, self).get_queryset()
+        qs = qs.filter(acceptat=False)
+        return qs
 
 ## API
 class BadgeViewSet(viewsets.ModelViewSet):
