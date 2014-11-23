@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView
 from rest_framework import viewsets
 
 from badges.models import Badge, Eveniment
-from badges.serializers import BadgeSerializer
+from badges.serializers import BadgeSerializer, EvenimentSerializer, PaginatedEvenimentSerializer
 from badges.forms import BadgeCreateForm, BadgeEventCreateForm
 
 
@@ -20,7 +20,7 @@ class BadgeList(TemplateView):
 
 
 class BadgeDetail(DetailView):
-    template_name = "badges/badge_detail.html"
+    template_name = "badges/eveniment_detail.html"
     model = Badge
 
 
@@ -38,6 +38,7 @@ class BadgeCreate(CreateView):
 
         nume_eveniment = form.cleaned_data.get("nume_activitate")
         an_eveniment = form.cleaned_data.get("an_activitate")
+        # import pdb; pdb.set_trace()
         eveniment, created = Eveniment.objects.get_or_create(nume=nume_eveniment, an=an_eveniment)
         self.object.eveniment = eveniment
         if created:
@@ -53,12 +54,17 @@ class BadgeCreate(CreateView):
         return super(BadgeCreate, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("badge:index")
+        return reverse("badges:index")
 
     def get_context_data(self, **kwargs):
         data = super(BadgeCreate, self).get_context_data(**kwargs)
         data['titlu'] = u"Adaugă un badge și spune-i povestea"
         return data
+
+
+class EvenimentDetail(DetailView):
+    template_name = "badges/eveniment_detail.html"
+    model = Eveniment
 
 
 class BadgeAppend(CreateView):
@@ -75,6 +81,7 @@ class BadgeAppend(CreateView):
         self.object = form.save(commit=False)
         self.object.eveniment = self.event
         self.object.save()
+        self.object.poster = self.request.user
         if self.request.user.utilizator.is_auto_approved:
             self.object.marcheaza_acceptat(self.request.user, save=False)
             messages.success(self.request, u"Povestea ta a fost adăugată celorlalte! Mulțumim!")
@@ -84,15 +91,21 @@ class BadgeAppend(CreateView):
         return super(BadgeAppend, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse("badge:index")
+        return reverse("badges:index")
 
     def get_context_data(self, **kwargs):
         data = super(BadgeAppend, self).get_context_data(**kwargs)
         data['titlu'] = u"Povestea ta de la %s" % self.event
         return data
 
+
 ## API
 class BadgeViewSet(viewsets.ModelViewSet):
     queryset = Badge.objects.all()
     serializer_class = BadgeSerializer
+
+
+class EvenimentViewSet(viewsets.ModelViewSet):
+    queryset = Eveniment.objects.all()
+    serializer_class = EvenimentSerializer
 

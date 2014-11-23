@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load gravatar %}
+{% load staticfiles %}
+
+{% block meta %}
+    <meta property="og:title" content="{{ object }}" />
+    <meta property="og:type" content="object" />
+    <meta property="og:image" content="{{ URL_ROOT }}{% if object.imagine %}{{ object.imagine_mare.url }}{% else %}{% static 'img/project_fb_cover.png' %}{% endif %}">
+    <meta property="og:url" content="{{ object.get_full_absolute_url }}" />
+    <meta property="og:description" content="{{ object.get_badge_imagine_implicita.amintire }}" />
+{% endblock %}
+
+{% block page_title %}
+    {{ object }}
+{% endblock %}
+
+{% block content %}
+    <div class = "row">
+        <div class = "col-md-6 col-xs-12">
+            <img style="width: 100%;" src = "{{ object.imagine_mare.url }}">
+            <div class = "facebook"><a target="_blank" href ="{{ object.facebook_share_link }}"><i class = "fa fa-facebook"></i></a></div>
+            <div class = "twitter"><a target="_blank" href = "{{ object.twitter_share_link }}"><i class = "fa fa-twitter"></i></a></div>
+        </div>
+        <div class = "col-md-6 col-xs-12">
+            {% for badge in object.badge_set.all %}
+            <blockquote class = "{% if badge.poster == user %}amintire-proprie{% endif %}">
+                {% with badge as amintire %}
+                {{ amintire.amintire }}
+                <small>{% with amintire.poster.utilizator as utilizator %}{% gravatar utilizator.user.email 16 %} {{ utilizator }}{% if utilizator.centru_local %}, {{ utilizator.centru_local }}{% endif %}, acum {{ amintire.timestamp|timesince }}{% endwith %}</small>
+                {% endwith %}
+            </blockquote>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

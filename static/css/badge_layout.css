@@ -18,14 +18,18 @@ h1, h2, h3 {
 
 .badge-masonry-brick img {
     width: 100%;
-    margin-bottom: 20px;
+
+}
+
+.badge-masonry-brick a {
+    margin-top: 20px;
 }
 
 form.form-horizontal .form-group {
     padding: 0 10px;
 }
 
-.big-add-buton {
+.big-add-button {
     position: fixed;
     top: 150px;
     left: 20px;
@@ -33,15 +37,15 @@ form.form-horizontal .form-group {
     color: #000033;
 }
 
-.big-add-buton :hover {
+.big-add-button :hover {
     color: #163A59;
 }
 
-.big-add-buton a:hover {
+.big-add-button a:hover {
     text-decoration: none;
 }
 
-.big-add-buton a span.hidden-description {
+.big-add-button a span.hidden-description {
     display: none;
     font-size: 18px;
     font-family: 'Lobster', serif;
@@ -50,10 +54,73 @@ form.form-horizontal .form-group {
     bottom: 18px;
 }
 
-.big-add-buton:hover span.hidden-description {
+.big-add-button:hover span.hidden-description {
     display: inline;
 }
 
 img.gravatar-profile {
     margin-right: 10px;
+}
+
+div.facebook {
+    background-color: #3b5998;
+    color: #FFF;
+    float:right;
+    margin-top: 0;
+    padding-top: 0;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.twitter {
+    background-color: #4099ff;
+    color: #FFF;
+    float:right;
+    margin-top: 0;
+    padding-top: 0;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.twitter a, div.facebook a {
+    color: #fff;
+}
+
+.badge-contents {
+    margin-top: 15px;
+}
+
+.badge-masonry-brick:hover div.badge-toolbox {
+    display: block;
+}
+
+.badge-toolbox {
+    font-size: 24px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: none;
+}
+
+.big-append-button a {
+    color: #FFF;
+}
+
+.badge-masonry-brick div.stats {
+    text-align: right;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.badge-masonry-brick .badge-toolbox .already-checked span {
+    color: #009933;
+}
+
+blockquote.amintire-proprie {
+    color: #999;
 }

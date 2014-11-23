@@ -11,10 +11,16 @@
 {#    <link rel="icon" href="../../favicon.ico">#}
 
     <title>Badge-uri cercetasesti</title>
-
+    {% block meta %}
+        <meta property="og:title" content="Colecția de badge-uri și amintiri" />
+        <meta property="og:type" content="object" />
+        <meta property="og:image" content="{{ URL_ROOT }}{% static 'img/project_fb_cover.png' %}">
+        <meta property="og:url" content="{{ URL_ROOT }}" />
+        <meta property="og:description" content="Un proiect al UP17 pentru călătoria înapoi în timp :)" />
+    {% endblock %}
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bootstrap/dist/css/bootstrap.min.css'%}" rel="stylesheet">
-
+    <link href="{% static 'fontawesome/css/font-awesome.css' %}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{% static 'css/badge_layout.css' %}" rel="stylesheet">
 
@@ -115,6 +121,7 @@
     <script src = "{% static 'masonry/masonry.js' %}"></script>
     <script src = "{% static 'imagesloaded/imagesloaded.js' %}"></script>
     <script src = "{% static 'angular-masonry/angular-masonry.js' %}"></script>
+    <script src = "{% static 'ngInfiniteScroll/build/ng-infinite-scroll.js' %}"></script>
 
     {% block extrajs %}
     {% endblock %}

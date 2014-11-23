@@ -88,7 +88,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ro-ro'
 
 TIME_ZONE = 'UTC'
 
@@ -128,6 +128,7 @@ BOWER_INSTALLED_APPS = (
     'angular-resource',
     'angular-masonry',
     'angular-moment',
+    'ngInfiniteScroll'
 )
 
 TEMPLATE_DIRS = global_settings.TEMPLATE_DIRS + (os.path.join(BASE_DIR, "templates"), )
@@ -138,7 +139,10 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'PAGINATE_BY': 10,                 # Default to 10
+#    'PAGINATE_BY_PARAM': 'page_size',  # Allow client to override, using `?page_size=xxx`.
+#    'MAX_PAGINATE_BY': 100             # Maximum limit allowed when using `?page_size=xxx`.
 }
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
@@ -146,4 +150,4 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = reverse_lazy("badges:index")
 LOGIN_URL = reverse_lazy("users:login")
 
-TEMPLATE_CONTEXT_PROCESSOR = global_settings.TEMPLATE_CONTEXT_PROCESSORS + ("django.core.context_processors.request", )
+TEMPLATE_CONTEXT_PROCESSOR = global_settings.TEMPLATE_CONTEXT_PROCESSORS + ("django.core.context_processors.request", "users.context_processors.url_root")

@@ -76,3 +76,8 @@ class Utilizator(models.Model):
     last_name = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Prenume")
 
     is_auto_approved = models.BooleanField(default=False, verbose_name=u"Este aprobat automat")
+
+    def __unicode__(self):
+        if self.porecla:
+            return u"%s" % self.porecla
+        return u"%s %s" % (self.first_name, self.last_name)

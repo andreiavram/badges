@@ -15,7 +15,7 @@ __author__ = 'yeti'
 class BadgeCreateForm(ModelForm):
     class Meta:
         model = Badge
-        exclude = ("poster", "acceptat", "acceptat_pe", "acceptat_de", )
+        exclude = ("poster", "acceptat", "acceptat_pe", "acceptat_de", "eveniment")
 
     nume_activitate = CharField(max_length=255, label=u"De unde e badge-ul?", help_text=u"În ce camp sau în ce context l-ai dobândit?")
     an_activitate = IntegerField(max_value=int(datetime.date.today().strftime("%Y")), min_value=1990, label=u"Anul")
@@ -34,11 +34,6 @@ class BadgeCreateForm(ModelForm):
         self.helper.form_action = "."
         self.helper.form_method = "post"
         self.helper.form_class = "form-horizontal"
-
-    def clean_an_activitate(self):
-        an = self.cleaned_data.get("an_activitate", 0)
-        if an not in range(1990, 2015):
-            raise ValidationError(u"Nu-i chiar posibil, nu?")
 
 
 class BadgeEventCreateForm(ModelForm):
