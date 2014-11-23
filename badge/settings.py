@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'crispy_forms',
     'django_gravatar',
+    'gunicorn',
 
     'badges',
     'users',
