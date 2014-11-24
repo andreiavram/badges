@@ -114,6 +114,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     ("css", os.path.join(STATIC_ROOT, "css")),
     ("js", os.path.join(STATIC_ROOT, "js")),
+    ("img", os.path.join(STATIC_ROOT, "img")),
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

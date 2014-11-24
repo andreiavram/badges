@@ -1,0 +1,63 @@
+body {
+    /* background-color: #eed571; */
+}
+
+.footer {
+    height: 250px   ;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+
+
+
+.navbar-inverse {
+    background-color: #e6be22;
+    border-color: #cfa817;
+}
+
+.navbar-inverse a {
+    color: #000;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #363636;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #363636;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #987a10;
+}
+
+.navbar .brand {
+    max-height: 40px;
+    overflow: visible;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar a.navbar-brand {
+    padding: 14px 15px 8px;
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 30px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 350px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 275px;
+  background-color: #f5f5f5;
+}

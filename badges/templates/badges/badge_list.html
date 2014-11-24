@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+{% block page_title %}
+    Colecția noastră de povești
+{% endblock %}
+
 {% block content %}
     <div ng-controller="BadgesController">
         <div class = "big-add-button"><a href = "{% url "badges:badge_create" %}"><span class = "glyphicon glyphicon-plus-sign"></span> <span class = "hidden-description">Adaugă și povestea ta</span></a></div>
