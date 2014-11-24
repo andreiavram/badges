@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load django_markdown %}
 
 {% block page_title %}
     {{ flatpage.title }}
 {% endblock %}
 
 {% block content %}
-    {{ flatpage.content }}
+    {{ flatpage.content|markdown }}
 {% endblock %}
