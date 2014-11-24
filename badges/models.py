@@ -51,6 +51,10 @@ class Eveniment(models.Model):
         imagine = self.get_badge_imagine_implicita()
         return imagine.imagine_thumbnail if imagine else None
 
+    def imagine_mini(self):
+        imagine = self.get_badge_imagine_implicita()
+        return imagine.imagine_mini if imagine else None
+
     def posters(self):
         return self.badgeuri_acceptate().filter(poster__isnull=False).values_list("poster__id", flat=True)
 
@@ -78,6 +82,11 @@ class Badge(models.Model):
                                       format='JPEG', options={'quality': 95})
     imagine_mare = ImageSpecField(source='imagine', processors=[SmartResize(1200, 1200, False)],
                                       format='JPEG', options={'quality': 95})
+
+    imagine_mini = ImageSpecField(source='imagine', processors=[SmartResize(50, 50, False)],
+                                      format='JPEG', options={'quality': 95})
+
+
 
     class Meta:
         verbose_name = "Propunere badge"

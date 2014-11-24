@@ -17,9 +17,20 @@
 {% block content %}
     <div class = "row">
         <div class = "col-md-6 col-xs-12">
-            <img style="width: 100%;" src = "{{ object.imagine_mare.url }}">
+            <img style="width: 100%; text-align: left; margin-left: 0;" src = "{{ object.imagine_mare.url }}">
             <div class = "facebook"><a target="_blank" href ="{{ object.facebook_share_link }}"><i class = "fa fa-facebook"></i></a></div>
             <div class = "twitter"><a target="_blank" href = "{{ object.twitter_share_link }}"><i class = "fa fa-twitter"></i></a></div>
+            {% if user.is_authenticated and user.is_staff %}
+            <div class = "row" style="margin-top: 40px; ">
+                <div class = "col-md-12">
+                {% for badge in object.badgeuri_acceptate %}
+                    {% if badge.imagine %}
+                        <img src = "{{ badge.imagine_mini.url }}" style="padding: 5px; padding-left:0;">
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
         <div class = "col-md-6 col-xs-12">
             {% for badge in object.badgeuri_acceptate %}

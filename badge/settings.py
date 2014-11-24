@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.flatpages',
 
     'djangobower',
     'rest_framework',
@@ -46,6 +47,8 @@ INSTALLED_APPS = (
     'django_gravatar',
     'gunicorn',
     'pagination_bootstrap',
+    'django_markdown',
+
 
     'badges',
     'users',

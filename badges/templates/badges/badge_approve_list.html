@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-    <div ng-controller="BadgeApproveController">
+    <div>
+    <div class = "alert alert-info">Badge-uri în starea <strong>{{ current_status_name }}</strong>: {{ object_list.count }}.</div>
     <div class = 'pull-right btn-toolbar' style="margin-bottom: 40px">
         <div class = 'btn-group'>
             {% for status_id, status_name in statuses %}
@@ -23,6 +24,7 @@
                 <th>Amintire</th>
                 <th>Cine</th>
                 <th class = "col-md-2">Când</th>
+                <th>Poză</th>
                 <th>Status</th>
                 <th class = "col-md-1">&nbsp;</th>
             </tr>
@@ -36,22 +38,36 @@
                     <td>{{ object.amintire }}</td>
                     <td>{{ object.poster.utilizator }}</td>
                     <td>acum {{ object.timestamp|timesince }}</td>
+                    <td>{% if object.imagine %}<span class = 'glyphicon glyphicon-ok'></span>{% endif %}</td>
                     <td>{{ object.get_acceptat_status_display }}</td>
                     <td>
                         <div class = 'btn-group pull-right'>
-                            <a style = "color: green" href = "" class = "btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-up"></span></a>
-                            <a style = "color: red" href = "" class = "btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-down"></span></a>
+                            <a style = "color: green" href = "{% url "badges:badge_aproba_status" pk=object.id %}?status=2" data-new-status=2 class = "aproba-action btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-up"></span></a>
+                            <a style = "color: red" href = "{% url "badges:badge_aproba_status" pk=object.id %}?status=3" data-new-status=3 class = "aproba-action btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-down"></span></a>
                         </div>
 {#                        <a href = "#" ng-click="update_status({{ object.id }}, 2)">Aprobă</a> / <a href = "#" ng-click="update_status({{ object.id }}, 3)">Respinge</a></td>#}
                 </tr>
             {% empty %}
                 <tr>
                     <td>&nbsp;</td>
-                    <td colspan="6"><em>Nu sunt povești în starea: <strong>{{ current_status_name }}</strong>.</em></td>
+                    <td colspan="7"><em>Nu sunt povești în starea: <strong>{{ current_status_name }}</strong>.</em></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     {% paginate %}
     </div>
+{% endblock %}
+
+{% block extrajs %}
+{#    <script>#}
+{#        $("document").ready(function () {#}
+{#            $(".aproba-action").click(function (e) {#}
+{#                $.post($(this).attr("href"), {"status": $(this).data("new-status")}, function (data) {#}
+{#                    #}
+{#                })#}
+{#                e.preventDefault()#}
+{#            })#}
+{#        })#}
+{#    </script>#}
 {% endblock %}

@@ -55,13 +55,13 @@ angular.module('badges').factory('UtilizatorService', ['$resource', function Uti
     })
 }]);
 
-angular.module("badges").controller("BadgeApproveController", ["$scope", "_", "BadgeService", function ($scope, _, BadgeService) {
-    $scope.update_status = function update_status(id, new_status) {
-        BadgeService.update_status({id: id, acceptat_status: new_status}, function (data) {
-            console.log(data);
-        })
-    }
-}]);
+//angular.module("badges").controller("BadgeApproveController", ["$scope", "_", "BadgeService", function ($scope, _, BadgeService) {
+//    $scope.update_status = function update_status(id, new_status) {
+//        BadgeService.update_status({id: id, acceptat_status: new_status}, function (data) {
+//            console.log(data);
+//        })
+//    }
+//}]);
 
 angular.module("badges").controller("BadgesController", ["$scope", "EvenimentService", "UtilizatorService", "_", function BadgesController($scope, EvenimentService, UtilizatorService, _) {
     $scope.page = 0;

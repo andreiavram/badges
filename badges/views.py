@@ -4,11 +4,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
 from django.db.models.aggregates import Count
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from rest_framework import viewsets
 from rest_framework.generics import UpdateAPIView
@@ -123,6 +124,25 @@ class BadgeAproba(ListView):
         data['current_status'] = self.status
         data['current_status_name'] = next((a[1] for a in BADGE_STATUSES if a[0] == self.status))
         return data
+
+
+class BadgeUpdateStatus(View):
+    @method_decorator(user_passes_test(lambda u: u.is_staff))
+    def dispatch(self, request, *args, **kwargs):
+        return super(BadgeUpdateStatus, self).dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.object = get_object_or_404(Badge, id=kwargs.pop("pk", 0))
+        self.new_status = request.GET.get("status", 1)
+        self.object.acceptat_status = self.new_status
+        self.object.save()
+        return HttpResponseRedirect(reverse("badges:badge_aproba") + "?status=1")
+
+
+
 
 ## API
 class BadgeViewSet(viewsets.ModelViewSet):

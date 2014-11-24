@@ -1,5 +1,5 @@
 from badges.views import BadgeList, BadgeViewSet, BadgeDetail, BadgeCreate, BadgeAppend, EvenimentViewSet, \
-    EvenimentDetail, BadgeAproba, UpdateBadgeStatus
+    EvenimentDetail, BadgeAproba, UpdateBadgeStatus, BadgeUpdateStatus
 from django.conf.urls import patterns, include, url
 from rest_framework import routers
 
@@ -13,8 +13,10 @@ urlpatterns = patterns('badges.views',
 
     url(r'create/$', BadgeCreate.as_view(), name="badge_create"),
     url(r'append/(?P<pk>\d+)/$', BadgeAppend.as_view(), name="badge_append"),
+    url(r'approve/(?P<pk>\d+)/$', BadgeUpdateStatus.as_view(), name="badge_aproba_status"),
     url(r'approve/$', BadgeAproba.as_view(), name="badge_aproba"),
 
+
     url(r'(?P<pk>\d+)/$', EvenimentDetail.as_view(), name="eveniment_detail"),
-    url(r'$', BadgeList.as_view(), name="index"),
+    url(r'colectie/$', BadgeList.as_view(), name="index"),
 )
