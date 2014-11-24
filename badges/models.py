@@ -30,7 +30,7 @@ class Eveniment(models.Model):
 
     def twitter_share_link(self):
         base_url = "https://twitter.com/share?%s"
-        return base_url % urllib.urlencode({"url": self.get_full_absolute_url(), "text": self.__unicode__()})
+        return base_url % urllib.urlencode({"url": self.get_full_absolute_url(), "text": self.__unicode__().encode("utf-8")})
 
     def get_badge_imagine_implicita(self):
         default = self.badgeuri_acceptate().filter(implicit_eveniment=True).first()
