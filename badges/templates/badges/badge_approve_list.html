@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load pagination_tags %}
+
+{% block page_title %}
+    Toate poveștile <small>{{ current_status_name }}e</small>
+{% endblock %}
+
+{% block content %}
+    <div ng-controller="BadgeApproveController">
+    <div class = 'pull-right btn-toolbar' style="margin-bottom: 40px">
+        <div class = 'btn-group'>
+            {% for status_id, status_name in statuses %}
+                <a class = "btn-info btn btn-default {% if current_status == status_id %}disabled{% endif %}" href = "{% url "badges:badge_aproba" %}?status={{ status_id }}">{{ status_name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Eveniment</th>
+                <th>Amintire</th>
+                <th>Cine</th>
+                <th class = "col-md-2">Când</th>
+                <th>Status</th>
+                <th class = "col-md-1">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% autopaginate object_list 20 %}
+            {% for object in object_list %}
+                <tr>
+                    <td>#{{ object.id }}</td>
+                    <td><a href = "{% url "badges:eveniment_detail" pk=object.eveniment.id %}">{{ object.eveniment }}</a></td>
+                    <td>{{ object.amintire }}</td>
+                    <td>{{ object.poster.utilizator }}</td>
+                    <td>acum {{ object.timestamp|timesince }}</td>
+                    <td>{{ object.get_acceptat_status_display }}</td>
+                    <td>
+                        <div class = 'btn-group pull-right'>
+                            <a style = "color: green" href = "" class = "btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-up"></span></a>
+                            <a style = "color: red" href = "" class = "btn btn-xs btn-default"><span class = "glyphicon glyphicon-thumbs-down"></span></a>
+                        </div>
+{#                        <a href = "#" ng-click="update_status({{ object.id }}, 2)">Aprobă</a> / <a href = "#" ng-click="update_status({{ object.id }}, 3)">Respinge</a></td>#}
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td colspan="6"><em>Nu sunt povești în starea: <strong>{{ current_status_name }}</strong>.</em></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% paginate %}
+    </div>
+{% endblock %}

@@ -22,7 +22,7 @@
             <div class = "twitter"><a target="_blank" href = "{{ object.twitter_share_link }}"><i class = "fa fa-twitter"></i></a></div>
         </div>
         <div class = "col-md-6 col-xs-12">
-            {% for badge in object.badge_set.all %}
+            {% for badge in object.badgeuri_acceptate %}
             <blockquote class = "{% if badge.poster == user %}amintire-proprie{% endif %}">
                 {% with badge as amintire %}
                 {{ amintire.amintire }}

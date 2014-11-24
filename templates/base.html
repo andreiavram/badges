@@ -52,6 +52,9 @@
             <li class="active"><a href="{% url "badges:index" %}">Home</a></li>
             <li><a href="#about">Despre proiect</a></li>
             <li><a href="#contact">Contact</a></li>
+            {% if user.is_authenticated and user.is_staff %}
+                <li><a href = "{% url "badges:badge_aproba" %}">Aprobare</a></li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}

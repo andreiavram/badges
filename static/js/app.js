@@ -28,8 +28,11 @@ angular.module('badges').factory('_', ['$window',
 ]);
 
 angular.module('badges').factory('BadgeService', ['$resource', function BadgeService($resource) {
+    base_url = "/api/1/badges/:id/";
         return $resource('/api/1/badges/:id/', {
             id: '@id'
+        }, {
+            update_status: { method: "patch", isArray: false, url: base_url + "update/"}
         });
     }
 ]);
@@ -50,6 +53,14 @@ angular.module('badges').factory('UtilizatorService', ['$resource', function Uti
     }, {
         "get_current" : { method: "get", isArray: false, url: base_url + "get_current/" }
     })
+}]);
+
+angular.module("badges").controller("BadgeApproveController", ["$scope", "_", "BadgeService", function ($scope, _, BadgeService) {
+    $scope.update_status = function update_status(id, new_status) {
+        BadgeService.update_status({id: id, acceptat_status: new_status}, function (data) {
+            console.log(data);
+        })
+    }
 }]);
 
 angular.module("badges").controller("BadgesController", ["$scope", "EvenimentService", "UtilizatorService", "_", function BadgesController($scope, EvenimentService, UtilizatorService, _) {
@@ -101,11 +112,6 @@ angular.module("badges").controller("BadgesController", ["$scope", "EvenimentSer
     };
 
     $scope.user_in_event = function user_in_event(event) {
-        console.log($scope.user.evenimente);
-        console.log(event.id);
-        console.log(event.id + 5);
-
-        console.log(_.indexOf(event.id, $scope.user.evenimente));
         return _.indexOf($scope.user.evenimente, event.id) >= 0
     }
 

@@ -33,9 +33,9 @@ class Eveniment(models.Model):
         return base_url % urllib.urlencode({"url": self.get_full_absolute_url(), "text": self.__unicode__()})
 
     def get_badge_imagine_implicita(self):
-        default = self.badge_set.filter(implicit_eveniment=True).first()
+        default = self.badgeuri_acceptate().filter(implicit_eveniment=True).first()
         if default is None:
-            default = self.badge_set.filter(imagine__isnull=False).first()
+            default = self.badgeuri_acceptate().filter(acceptat_status=2, imagine__isnull=False).first()
         if default is None:
             return None
 
@@ -52,7 +52,13 @@ class Eveniment(models.Model):
         return imagine.imagine_thumbnail if imagine else None
 
     def posters(self):
-        return self.badge_set.filter(poster__isnull=False).values_list("poster__id", flat=True)
+        return self.badgeuri_acceptate().filter(poster__isnull=False).values_list("poster__id", flat=True)
+
+    def badgeuri_acceptate(self):
+        return self.badge_set.filter(acceptat_status=2)
+
+
+BADGE_STATUSES = ((1, u"Indecis"), (2, u"Acceptat"), (3, u"Respins"))
 
 
 class Badge(models.Model):
@@ -60,7 +66,7 @@ class Badge(models.Model):
     amintire = models.TextField(null=True, blank=True, verbose_name=u"Povestea badge-ului", help_text=u"Adică cum și de ce a ajuns la tine, ce amintiri ai din campul sau din acțiunea aia, cu cine erai acolo?")
 
     timestamp = models.DateTimeField(auto_now_add=True)
-    acceptat = models.BooleanField(default=False)
+    acceptat_status = models.IntegerField(default=1, choices=BADGE_STATUSES)
     acceptat_pe = models.DateTimeField(null=True, blank=True)
     acceptat_de = models.ForeignKey(User, null=True, blank=True, related_name="badgeuri_acceptate")
 
@@ -80,3 +86,10 @@ class Badge(models.Model):
 
     def __unicode__(self):
         return u"{0}, {1}".format(self.eveniment.nume, self.eveniment.an)
+
+    def marcheaza_acceptat(self, user, save=False):
+        self.acceptat_status = 2
+        self.acceptat_de = user
+        self.acceptat_pe = datetime.datetime.now()
+        if save:
+            self.save()

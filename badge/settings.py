@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_gravatar',
     'gunicorn',
+    'pagination_bootstrap',
 
     'badges',
     'users',
@@ -62,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pagination_bootstrap.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'badge.urls'
@@ -151,4 +153,4 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = reverse_lazy("badges:index")
 LOGIN_URL = reverse_lazy("users:login")
 
-TEMPLATE_CONTEXT_PROCESSOR = global_settings.TEMPLATE_CONTEXT_PROCESSORS + ("django.core.context_processors.request", "users.context_processors.url_root")
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + ("django.core.context_processors.request", "users.context_processors.url_root")

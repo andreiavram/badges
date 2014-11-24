@@ -12,7 +12,7 @@ __author__ = 'yeti'
 class BadgeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Badge
-        fields = ['poster', 'amintire', 'timestamp', 'acceptat', 'imagine', 'imagine_thumbnail', 'timestamp_processed']
+        fields = ['poster', 'amintire', 'timestamp', 'acceptat_status', 'imagine', 'imagine_thumbnail', 'timestamp_processed']
 
     poster = UserSerializer(many=False)
     imagine_thumbnail = serializers.SerializerMethodField("get_imagine_thumbnail")
@@ -25,6 +25,13 @@ class BadgeSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_timestamp_processed(self, obj):
         return mktime(obj.timestamp.timetuple())
+
+
+class BadgeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Badge
+        fields = ['acceptat_status', ]
+
 
 class EvenimentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -44,7 +51,7 @@ class EvenimentSerializer(serializers.HyperlinkedModelSerializer):
         return obj.twitter_share_link()
 
     def get_badges(self, obj):
-        return BadgeSerializer(obj.badge_set.all(), many=True).data
+        return BadgeSerializer(obj.badgeuri_acceptate(), many=True).data
 
     def get_default_image(self, obj):
         default = obj.get_badge_imagine_implicita()
@@ -53,7 +60,7 @@ class EvenimentSerializer(serializers.HyperlinkedModelSerializer):
         return None
 
     def get_display_story(self, obj):
-        badge = obj.badge_set.all().order_by("-timestamp").first()
+        badge = obj.badgeuri_acceptate().order_by("-timestamp").first()
         return BadgeSerializer(badge).data
 
 
