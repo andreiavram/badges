@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url('^markdown/', include('django_markdown.urls')),
 
     url(r'^users/', include(user_urls, namespace="users")),
-    url(r'^pagini/', include('django.contrib.flatpages.urls')),
+    url(r'^pagini', include('django.contrib.flatpages.urls')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
