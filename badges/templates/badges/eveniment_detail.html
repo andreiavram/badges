@@ -36,7 +36,7 @@
             {% for badge in object.badgeuri_acceptate %}
             <blockquote class = "{% if badge.poster == user %}amintire-proprie{% endif %}">
                 {% with badge as amintire %}
-                {{ amintire.amintire }}
+                {{ amintire.amintire|linebreaks }}
                 <small>{% with amintire.poster.utilizator as utilizator %}{% gravatar utilizator.user.email 16 %} {{ utilizator }}{% if utilizator.centru_local %}, {{ utilizator.centru_local }}{% endif %}, acum {{ amintire.timestamp|timesince }}{% endwith %}</small>
                 {% endwith %}
             </blockquote>
