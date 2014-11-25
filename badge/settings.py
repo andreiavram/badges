@@ -136,6 +136,7 @@ BOWER_INSTALLED_APPS = (
     'angular-masonry',
     'angular-moment',
     'ngInfiniteScroll'
+    'jquery-bridget',
 )
 
 TEMPLATE_DIRS = global_settings.TEMPLATE_DIRS + (os.path.join(BASE_DIR, "templates"), )
