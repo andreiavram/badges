@@ -87,7 +87,7 @@
             <h1>{% block page_title %}{% endblock %}</h1>
         </div>
 
-        <div id="message_container">
+        <div id="message_container" style="margin-bottom: 30px">
             {% if messages %}
                 {% for message in messages %}
                     <div id="msg_{{ forloop.count }}" {% if message.tags %}
